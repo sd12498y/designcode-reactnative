@@ -19,7 +19,6 @@ import { render } from "react-dom";
 import Avatar from "../components/Avatar";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import { useNavigation } from "@react-navigation/native";
 
 const GET_CARD_COLLECTIONS = gql`
   {
@@ -65,12 +64,11 @@ function mapDispatchToProps(dispatch) {
       })
   };
 }
-function CardsQuery() {
+function CardsQuery({ navigation }) {
   const { loading, error, data } = useQuery(GET_CARD_COLLECTIONS);
 
   if (loading) return <Message>Loading...</Message>;
   if (error) return <Message>Error! {error.message}</Message>;
-  const navigation = useNavigation();
   return (
     <CardsContainer>
       {data.cardsCollection.items.map((card, index) => (
@@ -174,7 +172,7 @@ class HomeScreen extends React.Component {
                 style={{ paddingBottom: 30 }}
                 showsHorizontalScrollIndicator={false}
               >
-                <CardsQuery />
+                <CardsQuery navigation={this.props.navigation} />
               </ScrollView>
               <Subtitle>Popular Course</Subtitle>
 

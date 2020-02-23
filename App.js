@@ -5,12 +5,13 @@ import { Provider } from "react-redux";
 import TabNavigator from "./navigator/TabNavigator";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
+import { CONTENTFUL_API_KEY } from "./config.js";
 
 const client = new ApolloClient({
   uri: "https://graphql.contentful.com/content/v1/spaces/ldcl3ayg0mhx",
   credentials: "same-origin",
   headers: {
-    Authorization: process.env.CONTENTFUL_API_KEY
+    Authorization: CONTENTFUL_API_KEY
   }
 });
 const initialState = {
